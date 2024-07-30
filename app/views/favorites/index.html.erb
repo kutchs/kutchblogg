@@ -1,0 +1,40 @@
+<!-- app/views/favorites/index.html.erb -->
+<h1>Mes Favoris</h1>
+
+<div class="row">
+  <% @favorites.each do |post| %>
+    <div class="col-md-4">
+      <div class="card border-0" style="width: 18rem; position: relative;">
+        <%= link_to post_path(post) do %>
+          <div class="card-img-container">
+            <% if post.photo.attached? %>
+              <%= cl_image_tag(post.photo.key, class: "card-img-top rounded", transformation: [
+                    { width: 500, crop: "scale" },
+                    { quality: "auto", fetch_format: "auto" }
+                  ]) %>
+            <% else %>
+              <img src="https://via.placeholder.com/150" class="card-img-top rounded" alt="Default Image">
+            <% end %>
+          </div>
+        <% end %>
+        <div class="tags-overlay">
+          <% post.categories.each do |category| %>
+            <p class="badge"><%= category.name %></p>
+          <% end %>
+        </div>
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0"><%= post.title %></h5>
+            <%= link_to post_favorite_path(post), method: :delete, data: { controller: "favorite", action: "favorite#toggleFavorite" } do %>
+              <i class="fa-solid fa-heart favorite" style="color: #ec0941;" data-favorite-target="icon"></i>
+            <% end %>
+          </div>
+          <p class="card-text"><%= post.user.nickname %></p>
+        </div>
+        <div class="card-body d-flex justify-content-between align-items-center">
+          <%= link_to "En lire +", post, class: "btn custom-btn" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

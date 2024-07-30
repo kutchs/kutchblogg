@@ -3,7 +3,14 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_one_attached :photo
 
+  has_many :favorites
+  has_many :favorited_posts, through: :favorites, source: :post
 
+
+  def favorited?(post)
+    favorited_posts.include?(post)
+  end
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

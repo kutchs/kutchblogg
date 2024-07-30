@@ -1,4 +1,5 @@
-<div class="card border-0" style="width: 18rem; position: relative;">
+<!-- app/views/posts/_post.html.erb -->
+<div class="card border-0" style="width: 18rem; position: relative;" id="favorite_<%= post.id %>">
   <%= link_to post_path(post) do %>
     <div class="card-img-container">
       <% if post.photo.attached? %>
@@ -20,12 +21,11 @@
     <div class="d-flex justify-content-between align-items-center">
       <h5 class="card-title mb-0"><%= post.title %></h5>
       <% if current_user.favorited?(post) %>
-        
-        <%= link_to post_favorite_path(post), method: :delete, data: { controller: "favorite", action: "favorite#toggleFavorite" } do %>
+        <%= link_to post_favorite_path(post), method: :delete, data: { turbo_method: :delete, controller: "favorite", action: "favorite#toggleFavorite" }, remote: true do %>
           <i class="fa-solid fa-heart favorite" style="color: #ec0941;" data-favorite-target="icon"></i>
         <% end %>
       <% else %>
-        <%= link_to post_favorite_path(post), method: :post, data: { controller: "favorite", action: "favorite#toggleFavorite" } do %>
+        <%= link_to post_favorites_path(post), method: :post, data: { turbo_method: :post, controller: "favorite", action: "favorite#toggleFavorite" }, remote: true do %>
           <i class="fa-solid fa-heart" style="color: #707b8f;" data-favorite-target="icon"></i>
         <% end %>
       <% end %>

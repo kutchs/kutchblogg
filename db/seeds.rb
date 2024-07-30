@@ -1,23 +1,12 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
 require 'faker'
+require 'open-uri'
 
 User.destroy_all
 Category.destroy_all
 Post.destroy_all
 Comment.destroy_all
 
-
-
-
-
+# Create Users
 10.times do
   User.create!(
     email: Faker::Internet.email,
@@ -27,13 +16,12 @@ Comment.destroy_all
   )
 end
 
-
+# Create Categories
 5.times do
   Category.create!(
     name: Faker::Book.genre
   )
 end
-
 
 # Create Posts
 image_urls = [
@@ -55,14 +43,12 @@ image_urls = [
   'https://www.neozone.org/blog/wp-content/uploads/2020/12/kirimoko-tiny-house-001.jpg'
 ]
 
-
 users = User.all
 categories = Category.all
 
 20.times do
-  Post.create!(
+  post = Post.create!(
     user: users.sample,
-    category: categories.sample,
     title: Faker::Book.title,
     content: Faker::Lorem.paragraph(sentence_count: 5),
     url: Faker::Internet.url,
@@ -70,12 +56,15 @@ categories = Category.all
     date: Faker::Date.backward(days: 30)
   )
 
+  # Associer des catégories
+  post.categories << categories.sample(2)
+
   # Attacher une image avec ActiveStorage et Cloudinary
   image_url = image_urls.sample
   downloaded_image = URI.open(image_url)
-  post.image.attach(io: downloaded_image, filename: File.basename(image_url), content_type: 'image/jpeg')
+  post.photo.attach(io: downloaded_image, filename: File.basename(image_url), content_type: 'image/jpeg')
 
-  post
+  post.save
 end
 
 # Create Comments
@@ -85,7 +74,7 @@ posts = Post.all
   Comment.create!(
     user: users.sample,
     post: posts.sample,
-    content: Faker::Lorem.sentence(word_count: 100)
+    content: Faker::Lorem.sentence(word_count: 10)
   )
 end
 

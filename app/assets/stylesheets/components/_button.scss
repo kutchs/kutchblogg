@@ -1,0 +1,22 @@
+.btn .icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 0.5rem;
+}
+
+.custom-btn {
+  height: 25px; /* Adjust height as needed */
+  background-color: #0C0C14; /* Change the background color */
+  border-color: #666666; /* Border color */
+  padding: 0 10px; /* Adjust padding as needed */
+  font-size: 12px; /* Adjust font size as needed */
+  line-height: 1.5; /* Adjust line height as needed */
+  border-radius: 4px; /* Adjust border radius as needed */
+  color: #98989A; /* Adjust font color as needed */
+  align-content: center;
+}
+
+.custom-btn:hover {
+  background-color: #051725; /* Change the hover background color */
+  border-color: #666666; /* Change the hover border color */
+}

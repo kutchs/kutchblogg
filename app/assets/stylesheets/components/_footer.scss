@@ -1,0 +1,25 @@
+.footer {
+  background-color: #0e0e18;
+  color: #9f9fa4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px 162px;
+}
+
+.footer .list-inline-item a {
+  color: #9f9fa4;
+  text-decoration: none;
+}
+
+.footer .list-inline-item a:hover {
+  text-decoration: underline;
+}
+
+.footer .text-md-end {
+  text-align: end;
+}
+
+.border-secondary {
+  border-color: #3b3b47 !important;
+}

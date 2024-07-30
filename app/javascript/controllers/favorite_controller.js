@@ -1,3 +1,4 @@
+// app/javascript/controllers/favorite_controller.js
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
@@ -8,19 +9,25 @@ export default class extends Controller {
     const heartIcon = this.iconTarget
     const isFavorite = heartIcon.classList.contains('favorite')
 
-    if (isFavorite) {
-      heartIcon.classList.remove('favorite')
-      heartIcon.style.color = '#707b8f'
-    } else {
-      heartIcon.classList.add('favorite')
-      heartIcon.style.color = '#ec0941'
-    }
-
     // Envoie la requête pour ajouter/supprimer des favoris
-    const url = heartIcon.closest('a').href
-    fetch(url, {
-      method: isFavorite ? 'DELETE' : 'POST',
-      headers: { 'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content }
+    const form = event.target.closest('form')
+    fetch(form.action, {
+      method: form.method,
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content,
+        'Accept': 'text/vnd.turbo-stream.html'
+      },
+      body: new FormData(form)
+    })
+    .then(response => response.text())
+    .then(html => {
+      if (isFavorite) {
+        heartIcon.classList.remove('favorite')
+        heartIcon.style.color = '#707b8f'
+      } else {
+        heartIcon.classList.add('favorite')
+        heartIcon.style.color = '#ec0941'
+      }
     })
   }
 }

@@ -1,5 +1,14 @@
+
 .card {
   position: relative;
+  background-color: transparent; /* Set background to transparent */
+  border: none; /* Remove any border if present */
+}
+
+.card-body {
+  background-color: transparent; /* Set background to transparent */
+  padding-left: 8px; /* Add padding to the left */
+  max-height: 200px; /* Set max height */
 }
 
 .tags-overlay {
@@ -7,42 +16,50 @@
   top: 150px;
   left: 10px;
   z-index: 1;
- }
+  border-radius: 0px;
+
+}
 
 .badge {
   background-color: #0C0C14;
-  color: #6d7277;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 12px;
-  font-weight: 400;
+  color: #9f9fa4;
+  font-size: 11px;
+  font-weight: 200;
   margin-right: 0.25rem;
+  font-family: "Inter", Helvetica;
+  padding: 0.35rem;
+  border-radius: 4px;
+
 }
 
 .card-img-top {
-  height : 160px;
+  height: 160px;
 }
 
-.fixed-height-img {
-  height: 200px;
-  object-fit: cover;
-}
 
 .card-title {
-  font-family: "Inter-SemiBold", Helvetica;
+  font-family: "Inter", Helvetica;
   font-size: 14px;
   font-weight: 600;
-  color: #98989A;
+  color: #ffffff;
   padding-top: 10px;
   margin-bottom: 0;
-}
 
+}
+.card-content {
+  padding-top: 8px; /* Add padding to the top */
+  padding-bottom: 8px; /* Add padding to the bottom */
+  font-family: "Inter", Helvetica;
+  color: #9f9fa4;
+  font-size: 11px;
+  max-height: 50px;
+}
 .card-text {
-  font-family: "Inter-Regular", Helvetica;
+  font-family: "Inter", Helvetica;
   font-size: 11px;
   font-weight: 200;
-  color: #98989A;
-  margin-top: 0;
-  padding-top: 0;
+  color: #44FFD1;
+  padding-top: 16px;
 }
 
 .btn .icon {

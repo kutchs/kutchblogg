@@ -1,19 +1,16 @@
-.btn .icon {
-  width: 24px;
-  height: 24px;
-  margin-left: 0.5rem;
-}
 
 .custom-btn {
-  height: 25px; /* Adjust height as needed */
-  background-color: #0C0C14; /* Change the background color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px; /* Adjust height as needed */
+  width: 30%;
+  background-color: #0C0C14;
   border-color: #666666; /* Border color */
-  padding: 0 10px; /* Adjust padding as needed */
   font-size: 12px; /* Adjust font size as needed */
-  line-height: 1.5; /* Adjust line height as needed */
   border-radius: 4px; /* Adjust border radius as needed */
   color: #98989A; /* Adjust font color as needed */
-  align-content: center;
+  text-align: center; /* Ensure text is centered */
 }
 
 .custom-btn:hover {

@@ -1,2 +1,10 @@
-// Import page-specific CSS files here.
-@import "home";
+.custom-background {
+  background-color: #212127;
+  min-height: 100vh;
+  padding: 120px;
+}
+
+
+.custom-card {
+  margin-bottom: 32px;
+}

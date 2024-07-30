@@ -1,10 +1,10 @@
-
-
-<div class="container">
-  <div class="row g-4" id="posts">
+<div class="container-fluid custom-background">
+  <div class="row gx-4" id="posts">
     <% @posts.each do |post| %>
-      <div class="col-md-3"> <!-- Change col-md-4 to col-md-3 -->
-        <%= render post %>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="mb-4 custom-card">
+          <%= render post %>
+        </div>
       </div>
     <% end %>
   </div>

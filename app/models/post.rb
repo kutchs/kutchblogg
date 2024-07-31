@@ -3,7 +3,7 @@ class Post < ApplicationRecord
   has_and_belongs_to_many :categories
   #belongs_to :category
   has_many :comments, dependent: :destroy
-  
+
   has_many :favorites
   has_many :favorited_by_users, through: :favorites, source: :user
 
@@ -13,3 +13,6 @@ class Post < ApplicationRecord
   validates :content, presence: true
   validates :url, presence: true
 end
+
+
+

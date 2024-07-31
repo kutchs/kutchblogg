@@ -54,6 +54,8 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem 'cloudinary'
 gem 'will_paginate', '~> 3.3'
+gem 'bootstrap-will_paginate', '1.0.0'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

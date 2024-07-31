@@ -1,18 +1,39 @@
-<div class="container-fluid custom-background">
-  <div class="row gx-4" id="posts">
-    <% @posts.each do |post| %>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <div class="mb-4 custom-card">
-          <%= render post %>
-        </div>
-      </div>
-    <% end %>
-  </div>
 
-  <div class="d-flex flex-column align-items-center mt-4">
-    <div class="d-flex justify-content-center">
-      <%= will_paginate @posts, renderer: BootstrapPagination::Rails, class: 'pagination' %>
+
+<div class="container-fluid custom-background">
+  <div class="row">
+    <div class="col-md-12">
+  
+
+  <div class="postbox">
+    <div>
+      <div class="badge-top">Articles</div>
+      <h1 class="chapitre">Nos les sujets</h1>
     </div>
-    <%= link_to "New post", new_post_path, class: "btn custom2-btn mt-3" %>
+    <div class="row mb-4">
+    <div class="col-md-12">
+      <div class="d-flex justify-content-start flex-wrap mb-5">
+        <% @categories.each do |category| %>
+          <%= link_to category.name, posts_path(category: category.id), class: "badge badge-pill badge-category mr-2 mb-2" %>
+        <% end %>
+        <%= link_to "All Categories", posts_path, class: "badge badge-pill badge-category-all mr-2 mb-2" %>
+      </div>
+    </div>
+  </div>
+    <div class="row gx-4" id="posts">
+      <% @posts.each do |post| %>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="mb-4 custom-card">
+            <%= render post %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="d-flex flex-column align-items-center mt-4">
+      <div class="d-flex justify-content-center">
+        <%= will_paginate @posts, class: 'pagination' %>
+      </div>
+    </div>
   </div>
 </div>

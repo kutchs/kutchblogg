@@ -6,5 +6,6 @@ class UsersController < ApplicationController
     @user = current_user
     @favorites = current_user.favorited_posts
     @posts = current_user.posts
+    @post = Post.new # Assurez-vous que @post est initialisé
   end
 end

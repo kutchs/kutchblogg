@@ -1,5 +1,5 @@
 <!-- app/views/users/profil.html.erb -->
-<div class="container-fluid text-white mt-4 p-4 rounded" style="background-color: #1a1a1a;">
+<div class="container-fluid text-white p-4 rounded" style="background-color: #1a1a1a;">
   <div class="row">
     <div class="col-12">
       <!-- Onglets de navigation -->
@@ -12,6 +12,9 @@
         </li>
         <li class="nav-item" role="presentation">
           <a class="nav-link border-0" id="posts-tab" data-bs-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="false" style="background-color: transparent;">Mes Articles</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link border-0" id="create-post-tab" data-bs-toggle="tab" href="#create-post" role="tab" aria-controls="create-post" aria-selected="false" style="background-color: transparent;">Créer un Article</a>
         </li>
       </ul>
 
@@ -57,6 +60,64 @@
             <% end %>
           </div>
         </div>
+
+        <!-- Création d'un nouvel article -->
+        <div class="tab-pane fade" id="create-post" role="tabpanel" aria-labelledby="create-post-tab">
+          <h4 class="border-bottom pb-2">Créer un nouvel article</h4>
+          <%= form_with(model: @post, local: true, html: { multipart: true }) do |form| %>
+            <% if @post.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+                <ul>
+                  <% @post.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="mb-3">
+              <%= form.label :title, class: "form-label" %>
+              <%= form.text_field :title, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :category_ids, "Catégories", class: "form-label" %>
+              <% Category.all.each do |category| %>
+                <div class="form-check">
+                  <%= check_box_tag 'post[category_ids][]', category.id, @post.category_ids.include?(category.id), class: "form-check-input", id: "category_#{category.id}" %>
+                  <%= label_tag "category_#{category.id}", category.name, class: "form-check-label" %>
+                </div>
+              <% end %>
+            </div>
+            
+            <div class="mb-3">
+              <%= form.label :content, class: "form-label" %>
+              <%= form.text_area :content, class: "form-control", rows: 10 %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :url, class: "form-label" %>
+              <%= form.text_field :url, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :rating, class: "form-label" %>
+              <%= form.number_field :rating, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :photo, class: "form-label" %>
+              <%= form.file_field :photo, class: "form-control" %>
+            </div>
+
+
+
+            <div class="actions">
+              <%= form.submit "Créer l'article", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
@@ -85,17 +146,22 @@
     height: 100px;
   }
   .nav-tabs .nav-link.active {
-    background-color: transparent !important;
-    color: #f8f9fa !important;
-    border: none !important;
+    color: #fff !important;
+    border: 2px solid #444 !important;
+    border-radius: 16px !important;
   }
   .nav-tabs .nav-link {
     color: #f8f9fa;
+    border: 2px solid transparent;
+    border-radius: 16px;
   }
   .tab-content {
     padding: 1rem;
   }
   .card {
     background-color: transparent !important;
+  }
+  .form-label {
+    color: #f8f9fa;
   }
 </style>

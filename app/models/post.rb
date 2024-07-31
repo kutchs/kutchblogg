@@ -9,5 +9,12 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true
   validates :url, presence: true
-end
 
+  before_create :set_default_date
+
+  private
+
+  def set_default_date
+    self.date ||= DateTime.now
+  end
+end

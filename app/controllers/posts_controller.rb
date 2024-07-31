@@ -37,7 +37,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: "Post was successfully created." }
+        format.html { redirect_to user_profil_path, notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -72,12 +72,13 @@ class PostsController < ApplicationController
   private
 
     # Use callbacks to share common setup or constraints between actions.
+    private
+
     def set_post
       @post = Post.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :content, :url, :rating, :date, category_ids: [])
+      params.require(:post).permit(:title, :content, :url, :rating, :date, :photo, category_ids: [])
     end
 end

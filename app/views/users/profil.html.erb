@@ -139,18 +139,19 @@
           <h4 class="border-bottom pb-2">Liste des Catégories</h4>
           <div id="categories">
             <% @categories.each do |category| %>
-              <div class="mb-3">
-                <%= form_with(model: category, url: category_path(category), method: :patch, local: true, data: { turbo_frame: dom_id(category) }) do |form| %>
-                  <div class="form-group">
-                    <%= form.label :name, class: "form-label" %>
-                    <%= form.text_field :name, class: "form-control" %>
-                  </div>
-                  <div class="actions">
-                    <%= form.submit "Mettre à jour", class: "btn btn-primary" %>
-                  </div>
-                <% end %>
-                <turbo-frame id="<%= dom_id(category) %>"></turbo-frame>
-              </div>
+              <turbo-frame id="<%= dom_id(category) %>">
+                <div class="mb-3 category-form">
+                  <%= form_with(model: category, url: category_path(category), method: :patch, local: true, data: { turbo_frame: dom_id(category) }) do |form| %>
+                    <div class="form-group">
+                      <%= form.label :name, class: "form-label" %>
+                      <%= form.text_field :name, class: "form-control" %>
+                    </div>
+                    <div class="actions">
+                      <%= form.submit "Mettre à jour", class: "btn btn-primary" %>
+                    </div>
+                  <% end %>
+                </div>
+              </turbo-frame>
             <% end %>
           </div>
           <%= form_with(model: Category.new, url: categories_path, local: true) do |form| %>
@@ -208,5 +209,8 @@
   }
   .form-label {
     color: #f8f9fa;
+  }
+  .category-form.updated .form-control {
+    background-color: #2a2a2a !important;
   }
 </style>

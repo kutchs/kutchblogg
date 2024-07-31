@@ -19,7 +19,12 @@ class CategoriesController < ApplicationController
     if @category.update(category_params)
       respond_to do |format|
         format.html { redirect_to user_settings_path, notice: 'Catégorie mise à jour avec succès.' }
-        format.turbo_stream
+        format.turbo_stream do
+          render turbo_stream: [
+            turbo_stream.append('flash', partial: 'shared/flashes', locals: { notice: 'Catégorie mise à jour avec succès.' }),
+            turbo_stream.replace(dom_id(@category), partial: 'categories/category', locals: { category: @category })
+          ]
+        end
       end
     else
       respond_to do |format|

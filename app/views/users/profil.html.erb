@@ -16,6 +16,9 @@
         <li class="nav-item" role="presentation">
           <a class="nav-link border-0" id="create-post-tab" data-bs-toggle="tab" href="#create-post" role="tab" aria-controls="create-post" aria-selected="false" style="background-color: transparent;">Créer un Article</a>
         </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link border-0" id="settings-tab" data-bs-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false" style="background-color: transparent;">Settings</a>
+        </li>
       </ul>
 
       <div class="tab-content mt-4" id="profileTabsContent">
@@ -127,6 +130,36 @@
 
             <div class="actions">
               <%= form.submit "Créer l'article", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+
+        <!-- Paramètres (Settings) -->
+        <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+          <h4 class="border-bottom pb-2">Liste des Catégories</h4>
+          <div id="categories">
+            <% @categories.each do |category| %>
+              <div class="mb-3">
+                <%= form_with(model: category, url: category_path(category), method: :patch, local: true, data: { turbo_frame: dom_id(category) }) do |form| %>
+                  <div class="form-group">
+                    <%= form.label :name, class: "form-label" %>
+                    <%= form.text_field :name, class: "form-control" %>
+                  </div>
+                  <div class="actions">
+                    <%= form.submit "Mettre à jour", class: "btn btn-primary" %>
+                  </div>
+                <% end %>
+                <turbo-frame id="<%= dom_id(category) %>"></turbo-frame>
+              </div>
+            <% end %>
+          </div>
+          <%= form_with(model: Category.new, url: categories_path, local: true) do |form| %>
+            <div class="mb-3">
+              <%= form.label :name, "Nouvelle catégorie", class: "form-label" %>
+              <%= form.text_field :name, class: "form-control" %>
+            </div>
+            <div class="actions">
+              <%= form.submit "Ajouter une catégorie", class: "btn btn-success" %>
             </div>
           <% end %>
         </div>

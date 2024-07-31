@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :categories
+  resources :categories, only: [:index, :create, :update, :edit, :show, :new]
 
   resources :posts do
     resources :comments
@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   get 'user_profil', to: 'users#profil', as: 'user_profil'
   patch 'update_profile', to: 'users#update_profile', as: 'update_profile'
 
+  # Route pour les paramètres (settings)
+  get 'user_settings', to: 'users#settings', as: 'user_settings'
 end

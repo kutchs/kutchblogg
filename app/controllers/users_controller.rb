@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     @favorites = current_user.favorited_posts
     @posts = current_user.posts
     @post = Post.new # Pour le formulaire de création d'article
+    @categories = Category.all
   end
 
   def update_profile
@@ -14,6 +15,23 @@ class UsersController < ApplicationController
       redirect_to user_profil_path, notice: 'Profil mis à jour avec succès.'
     else
       render :profil
+    end
+  end
+
+  def settings
+    @categories = Category.all
+  end
+
+  def update_categories
+    if params[:categories].present?
+      params[:categories].each do |id, name|
+        category = Category.find_by(id: id)
+        category.update(name: name) if category
+      end
+      redirect_to user_settings_path, notice: 'Catégories mises à jour avec succès.'
+    else
+      flash.now[:alert] = 'Aucune catégorie à mettre à jour.'
+      render :settings
     end
   end
 

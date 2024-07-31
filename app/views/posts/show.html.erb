@@ -38,7 +38,7 @@
                 <div class="mb-3">
                   <p class="mb-0">Catégorie:</p>
                   <% @post.categories.each do |category| %>
-                    <span class="t"><%= category.name %></span>
+                    <span class="badge bg-secondary t"><%= category.name %></span>
                   <% end %>
                 </div>
                 <div class="mb-3">
@@ -46,6 +46,17 @@
                   <p class="mb-0 t"><%= @post.user.nickname %></p>
                 </div>
               </div>
+            </div>
+            <div class="mt-3">
+              <% if current_user.favorited?(@post) %>
+                <%= link_to post_favorite_path(@post), method: :delete, data: { controller: "favorite", action: "favorite#toggleFavorite" } do %>
+                  <i class="fa-solid fa-heart favorite" style="color: #ec0941;" data-favorite-target="icon"></i>
+                <% end %>
+              <% else %>
+                <%= link_to post_favorite_path(@post), method: :post, data: { controller: "favorite", action: "favorite#toggleFavorite" } do %>
+                  <i class="fa-solid fa-heart" style="color: #707b8f;" data-favorite-target="icon"></i>
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>

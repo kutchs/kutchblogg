@@ -1,12 +1,40 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: white;
+.custom-navbar-bg {
+  background-color: #000000; /* Fond noir */
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+.navbar-nav .nav-link {
+  color: #a7a8b1; /* Couleur des liens de navigation */
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.custom-navbar-brand .custom-navbar-logo {
+  width: 45%; /* Taille du logo */
+}
+
+.navbar-dark .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28 255, 255, 255, 1%29' stroke-width='2' linecap='round' linejoin='round' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-nav li {
+  margin: 0 10px;
+}
+
+.container-fluid .row {
+  width: 100%;
+}
+
+.container-fluid .col-md-3, .container-fluid .col-md-6 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar.rounded-circle {
+  width: 40px; /* Ajustez la taille selon vos besoins */
+  height: 40px; /* Assurez-vous que la hauteur est la même que la largeur pour un cercle parfait */
 }

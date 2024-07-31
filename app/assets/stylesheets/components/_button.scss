@@ -3,17 +3,70 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 24px; /* Adjust height as needed */
+  height: 24px;
   width: 30%;
-  background-color: #0C0C14;
-  border-color: #666666; /* Border color */
-  font-size: 12px; /* Adjust font size as needed */
-  border-radius: 4px; /* Adjust border radius as needed */
-  color: #98989A; /* Adjust font color as needed */
-  text-align: center; /* Ensure text is centered */
+  background-color: #000000;
+  border-color: #666666;
+  font-size: 12px;
+  border-radius: 4px;
+  color: #98989A;
+  text-align: center;
 }
 
 .custom-btn:hover {
-  background-color: #051725; /* Change the hover background color */
-  border-color: #666666; /* Change the hover border color */
+  background-color: #55e7c0;
+}
+.badge-category {
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 400;
+  height: 40px;
+  line-height: 40px;
+  width: 150px;
+  margin-right: 8px;
+  border-radius: 8px;
+  border: 1px solid #666666;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-category-all {
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 400;
+  height: 40px;
+  line-height: 40px;
+  width: 150px;
+  margin-right: 8px;
+  border-radius: 8px;
+  border: 1px solid #666666;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-category:hover,
+.badge-category-all:hover {
+  border-color: #44FFD1;
+}
+
+.badge-top {
+  background-color: #909097;
+  color: #000000;
+  font-size: 11px;
+  font-weight: 200;
+  margin-right: 0.25rem;
+  font-family: "Inter", Helvetica;
+  padding: 0.35rem;
+  border-radius: 4px;
+  height: 20px;
+  margin-bottom: 10px;
+  display: inline-flex; /* Assure que la largeur s'ajuste au texte et permet le centrage */
+  align-items: center; /* Centre le contenu verticalement */
+  justify-content: center; /* Centre le contenu horizontalement */
 }

@@ -3,11 +3,25 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
-    @posts = Post.paginate(page: params[:page], per_page: 12)
+    if params[:category].present?
+      @category = Category.find(params[:category])
+      @posts = @category.posts.paginate(page: params[:page], per_page: 12)
+    else
+      @posts = Post.paginate(page: params[:page], per_page: 12)
+    end
+    @categories = Category.all
   end
+
 
   # GET /posts/1 or /posts/1.json
   def show
+    @post = Post.find(params[:id])
+    @similar_posts = Post.joins(:categories)
+                         .where(categories: { id: @post.category_ids })
+                         .where.not(id: @post.id)
+                         .distinct
+                         .limit(4)
+    @similar_posts ||= [] # Assurez-vous que @similar_posts n'est jamais nil
   end
 
   # GET /posts/new

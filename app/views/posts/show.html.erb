@@ -1,10 +1,73 @@
-<p style="color: green"><%= notice %></p>
+<div class="container-fluid show p-0">
+  <!-- Bandeau avec l'image -->
+  <div class="row no-gutters m-0">
+    <div class="col-12 p-0">
+      <% if @post.photo.attached? %>
+        <%= cl_image_tag(@post.photo.key, class: "img-fluid w-100", style: "height: 250px;", transformation: [
+              { width: 1200, crop: "scale" },
+              { quality: "auto", fetch_format: "auto" }
+            ]) %>
+      <% else %>
+        <img src="https://via.placeholder.com/1200x100" class="img-fluid w-100" style="height: 100px;" alt="Default Image">
+      <% end %>
+    </div>
+  </div>
 
-<%= render @post %>
+  <!-- Contenu et informations du post -->
+  <div class="container mt-4 p-0">
+    <div class="row m-0">
+      <div class="col-md-8 p-0">
+        <h1><%= @post.title %></h1>
+        <p><%= @post.content %></p>
+      </div>
+      <div class="col-md-4 p-0">
+        <div class="card">
+          <div class="card-body text-gray">
+            <div class="row">
+              <div class="col-6">
+                <div class="mb-3">
+                  <p class="mb-0">Date de publication:</p>
+                  <p class="mb-0 t"><%= @post.created_at.strftime("%B %d, %Y") %></p>
+                </div>
+                <div class="mb-3">
+                  <p class="mb-0">Temps de lecture:</p>
+                  <p class="mb-0 t">3 minutes</p>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="mb-3">
+                  <p class="mb-0">Catégorie:</p>
+                  <% @post.categories.each do |category| %>
+                    <span class="t"><%= category.name %></span>
+                  <% end %>
+                </div>
+                <div class="mb-3">
+                  <p class="mb-0">Auteur:</p>
+                  <p class="mb-0 t"><%= @post.user.nickname %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "Back to posts", posts_path %>
-
-  <%= button_to "Destroy this post", @post, method: :delete %>
+  <!-- Posts similaires -->
+  <div class="container-fluid similar">
+    <div class="row m-0">
+      <div class="col-12">
+        <h3 style="padding-left: 120px;">Posts similaires</h3>
+      </div>
+    </div>
+    <div class="row m-0">
+      <% @similar_posts.each do |post| %>
+        <div class="col-md-3 mb-4 p-0">
+          <div class="post-card">
+            <%= render 'post', post: post %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

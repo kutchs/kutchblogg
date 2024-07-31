@@ -1,0 +1,40 @@
+.text-gray {
+  color: #9f9fa4;
+  font-family: "Inter", Helvetica;
+  font-size: 13px;
+}
+
+.img-fluid {
+  object-fit: cover;
+}
+
+.container-fluid.show {
+  background-color: #212127;
+  color: #d2d2d6;
+}
+
+.card-title, .card-content, .card-text, .badge {
+  color: #d2d2d6;
+}
+
+.similar {
+  background-color: #000000;
+  padding: 120px; /* Padding de 120px sur tous les côtés */
+}
+
+.similar h3 {
+  padding-left: 0; /* Supprime le padding de 120px pour le h3 */
+  margin-bottom: 20px; /* Espace entre le titre et les cartes */
+}
+
+.similar .post-card {
+  margin-bottom: 20px; /* Espace entre les cartes */
+}
+
+.card-title, .card-content, .card-text {
+  color: #ffffff; /* Couleur du texte des posts similaires */
+}
+
+.t {
+  color: white;
+}

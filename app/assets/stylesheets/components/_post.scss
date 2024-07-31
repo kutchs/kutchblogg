@@ -1,4 +1,9 @@
-
+.chapitre {
+  text-align: left; /* Aligner le texte à gauche */
+  font-size: 32px;
+  padding-bottom: 40px;
+  color: #ffffff; /* Couleur du texte (ajuster selon vos besoins) */
+}
 .card {
   position: relative;
   background-color: transparent; /* Set background to transparent */

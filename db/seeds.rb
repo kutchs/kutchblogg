@@ -1,10 +1,11 @@
 require 'faker'
 require 'open-uri'
 
-User.destroy_all
-Category.destroy_all
-Post.destroy_all
+# Assurez-vous de détruire les enregistrements dans le bon ordre
 Comment.destroy_all
+Post.destroy_all
+Category.destroy_all
+User.destroy_all
 
 # Create Users
 10.times do
@@ -79,3 +80,4 @@ posts = Post.all
 end
 
 puts "Seed data created successfully!"
+

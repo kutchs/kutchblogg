@@ -1,5 +1,5 @@
 <!-- app/views/users/profil.html.erb -->
-<div class="container-fluid text-white p-4 rounded" style="background-color: #1a1a1a;">
+<div class="container-fluid text-white mt-4 p-4 rounded" style="background-color: #1a1a1a;">
   <div class="row">
     <div class="col-12">
       <!-- Onglets de navigation -->
@@ -23,12 +23,26 @@
         <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
           <div class="card bg-secondary text-white mb-4 border-0">
             <div class="card-header bg-dark text-center border-0">
-              <%= image_tag "https://via.placeholder.com/150", class: "rounded-circle mb-2", alt: "User avatar" %>
+              <% if @user.profile_photo.attached? %>
+                <%= image_tag @user.profile_photo, class: "rounded-circle mb-2", alt: "User avatar", style: "width: 150px; height: 150px;" %>
+              <% else %>
+                <%= image_tag "https://via.placeholder.com/150", class: "rounded-circle mb-2", alt: "User avatar" %>
+              <% end %>
               <h4 class="card-title"><%= @user.nickname %></h4>
             </div>
             <div class="card-body">
               <p class="card-text"><strong>Email:</strong> <%= @user.email %></p>
               <p class="card-text"><strong>Date de création:</strong> <%= @user.created_at.strftime("%B %d, %Y") %></p>
+
+              <%= form_with(model: @user, url: update_profile_path, local: true, html: { multipart: true }) do |form| %>
+                <div class="mb-3">
+                  <%= form.label :profile_photo, "Photo de profil", class: "form-label" %>
+                  <%= form.file_field :profile_photo, class: "form-control" %>
+                </div>
+                <div class="actions">
+                  <%= form.submit "Mettre à jour le profil", class: "btn btn-primary" %>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
@@ -82,16 +96,6 @@
             </div>
 
             <div class="mb-3">
-              <%= form.label :category_ids, "Catégories", class: "form-label" %>
-              <% Category.all.each do |category| %>
-                <div class="form-check">
-                  <%= check_box_tag 'post[category_ids][]', category.id, @post.category_ids.include?(category.id), class: "form-check-input", id: "category_#{category.id}" %>
-                  <%= label_tag "category_#{category.id}", category.name, class: "form-check-label" %>
-                </div>
-              <% end %>
-            </div>
-            
-            <div class="mb-3">
               <%= form.label :content, class: "form-label" %>
               <%= form.text_area :content, class: "form-control", rows: 10 %>
             </div>
@@ -111,7 +115,15 @@
               <%= form.file_field :photo, class: "form-control" %>
             </div>
 
-
+            <div class="mb-3">
+              <%= form.label :category_ids, "Catégories", class: "form-label" %>
+              <% Category.all.each do |category| %>
+                <div class="form-check">
+                  <%= check_box_tag 'post[category_ids][]', category.id, @post.category_ids.include?(category.id), class: "form-check-input", id: "category_#{category.id}" %>
+                  <%= label_tag "category_#{category.id}", category.name, class: "form-check-label" %>
+                </div>
+              <% end %>
+            </div>
 
             <div class="actions">
               <%= form.submit "Créer l'article", class: "btn btn-primary" %>

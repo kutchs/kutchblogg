@@ -16,5 +16,6 @@ Rails.application.routes.draw do
 
   # Route pour le profil utilisateur
   get 'user_profil', to: 'users#profil', as: 'user_profil'
+  patch 'update_profile', to: 'users#update_profile', as: 'update_profile'
 
 end

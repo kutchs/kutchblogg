@@ -57,6 +57,7 @@ gem 'will_paginate', '~> 3.3'
 gem 'bootstrap-will_paginate', '1.0.0'
 
 
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'rails-erd', '~> 1.7', '>= 1.7.2'
@@ -68,6 +69,8 @@ group :development do
   gem "web-console"
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 	gem 'dotenv-rails', groups: [:development, :test]
+  gem 'derailed'
+
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"

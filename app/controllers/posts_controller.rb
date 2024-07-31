@@ -12,16 +12,14 @@ class PostsController < ApplicationController
     @categories = Category.all
   end
 
-
   # GET /posts/1 or /posts/1.json
   def show
-    @post = Post.find(params[:id])
+    @comments = @post.comments
     @similar_posts = Post.joins(:categories)
                          .where(categories: { id: @post.category_ids })
                          .where.not(id: @post.id)
                          .distinct
                          .limit(4)
-    @similar_posts ||= [] # Assurez-vous que @similar_posts n'est jamais nil
   end
 
   # GET /posts/new
@@ -63,14 +61,16 @@ class PostsController < ApplicationController
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
+    @post.favorites.destroy_all
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
+      format.html { redirect_to posts_url, notice: "Le post a été supprimé avec succès." }
       format.json { head :no_content }
     end
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
@@ -78,6 +78,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :content, :url, :rating, :date, :category_id)
+      params.require(:post).permit(:title, :content, :url, :rating, :date, category_ids: [])
     end
 end

@@ -1,38 +1,46 @@
-
-
 <div class="container-fluid custom-background">
+  <!-- Bandeau sous la navbar -->
   <div class="row">
-    <div class="col-md-12">
-  
-
-  <div class="postbox">
-    <div>
-      <div class="badge-top">Articles</div>
-      <h1 class="chapitre">Nos les sujets</h1>
-    </div>
-    <div class="row mb-4">
-    <div class="col-md-12">
-      <div class="d-flex justify-content-start flex-wrap mb-5">
-        <% @categories.each do |category| %>
-          <%= link_to category.name, posts_path(category: category.id), class: "badge badge-pill badge-category mr-2 mb-2" %>
-        <% end %>
-        <%= link_to "All Categories", posts_path, class: "badge badge-pill badge-category-all mr-2 mb-2" %>
+    <div class="col-12 p-0">
+      <div class="banner text-white py-3">
+        <h1 class="text-center">Bienvenue sur notre blog</h1>
       </div>
     </div>
   </div>
-    <div class="row gx-4" id="posts">
-      <% @posts.each do |post| %>
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-          <div class="mb-4 custom-card">
-            <%= render post %>
+
+  <!-- Section principale -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="postbox">
+        <div>
+          <div class="badge-top">Articles</div>
+          <h1 class="chapitre">Nos sujets</h1>
+        </div>
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div class="d-flex justify-content-start flex-wrap mb-5">
+              <% @categories.each do |category| %>
+                <%= link_to category.name, posts_path(category: category.id), class: "badge badge-pill badge-category mr-2 mb-2" %>
+              <% end %>
+              <%= link_to "All Categories", posts_path, class: "badge badge-pill badge-category-all mr-2 mb-2" %>
+            </div>
           </div>
         </div>
-      <% end %>
-    </div>
+        <div class="row gx-4" id="posts">
+          <% @posts.each do |post| %>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="mb-4 custom-card">
+                <%= render post %>
+              </div>
+            </div>
+          <% end %>
+        </div>
 
-    <div class="d-flex flex-column align-items-center mt-4">
-      <div class="d-flex justify-content-center">
-        <%= will_paginate @posts, class: 'pagination' %>
+        <div class="d-flex flex-column align-items-center mt-4">
+          <div class="d-flex justify-content-center">
+            <%= will_paginate @posts, class: 'pagination' %>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -1,19 +1,32 @@
-
 <%= simple_form_for(@post) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <div class="bg-dark text-white p-4 rounded form-container" style="max-width: 600px; margin: auto; padding-left: 120px; padding-right: 120px;">
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <%= f.association :user %>
-    <%= f.association :category %>
-    <%= f.input :rating %>
-    <%= f.input :url %>
-    <%= f.input :date %>
-    <%= f.input :content %>
-    <%= f.input :title %>
-  </div>
+    <%= f.hidden_field :user_id, value: current_user.id %>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+    <div class="form-group">
+      <%= f.input :title, label: "Titre", input_html: { class: 'form-control custom-input' } %>
+    </div>
+
+    <div class="form-group">
+      <%= f.input :content, label: "Contenu", input_html: { class: 'form-control custom-input' } %>
+    </div>
+
+    <div class="form-group">
+      <%= f.input :category_ids, collection: Category.all, as: :check_boxes, label: "Catégories", input_html: { class: 'form-check-input custom-input' }, item_wrapper_class: 'form-check' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.input :date, label: "Date", as: :date, discard_day: true, discard_minute: true, discard_second: true, input_html: { class: 'form-control custom-input' } %>
+    </div>
+
+    <div class="form-group">
+      <%= f.input :url, label: "URL", input_html: { class: 'form-control custom-input' } %>
+    </div>
+
+    <div class="form-group mt-3">
+      <%= f.button :submit, class: 'btn btn-primary' %>
+    </div>
   </div>
 <% end %>

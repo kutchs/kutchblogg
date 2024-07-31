@@ -1,0 +1,101 @@
+<!-- app/views/users/profil.html.erb -->
+<div class="container-fluid text-white mt-4 p-4 rounded" style="background-color: #1a1a1a;">
+  <div class="row">
+    <div class="col-12">
+      <!-- Onglets de navigation -->
+      <ul class="nav nav-tabs border-0" id="profileTabs" role="tablist" style="background-color: transparent;">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active border-0" id="info-tab" data-bs-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true" style="background-color: transparent;">Informations</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link border-0" id="favorites-tab" data-bs-toggle="tab" href="#favorites" role="tab" aria-controls="favorites" aria-selected="false" style="background-color: transparent;">Favoris</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link border-0" id="posts-tab" data-bs-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="false" style="background-color: transparent;">Mes Articles</a>
+        </li>
+      </ul>
+
+      <div class="tab-content mt-4" id="profileTabsContent">
+        <!-- Informations de l'utilisateur -->
+        <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+          <div class="card bg-secondary text-white mb-4 border-0">
+            <div class="card-header bg-dark text-center border-0">
+              <%= image_tag "https://via.placeholder.com/150", class: "rounded-circle mb-2", alt: "User avatar" %>
+              <h4 class="card-title"><%= @user.nickname %></h4>
+            </div>
+            <div class="card-body">
+              <p class="card-text"><strong>Email:</strong> <%= @user.email %></p>
+              <p class="card-text"><strong>Date de création:</strong> <%= @user.created_at.strftime("%B %d, %Y") %></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Favoris de l'utilisateur -->
+        <div class="tab-pane fade" id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
+          <h4 class="border-bottom pb-2">Mes Favoris</h4>
+          <div class="row">
+            <% @favorites.each do |post| %>
+              <div class="col-md-6 mb-3">
+                <div class="card bg-secondary text-white h-100 border-0">
+                  <%= render 'posts/post', post: post %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <!-- Articles de l'utilisateur -->
+        <div class="tab-pane fade" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+          <h4 class="border-bottom pb-2">Mes Articles</h4>
+          <div class="row">
+            <% @posts.each do |post| %>
+              <div class="col-md-6 mb-3">
+                <div class="card bg-secondary text-white h-100 border-0">
+                  <%= render 'posts/post', post: post %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Custom styles -->
+<style>
+  .bg-dark {
+    background-color: #1a1a1a !important;
+  }
+  .bg-secondary {
+    background-color: #2a2a2a !important;
+  }
+  .text-white {
+    color: #f8f9fa !important;
+  }
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+  .border-bottom {
+    border-bottom: 1px solid #444;
+  }
+  .rounded-circle {
+    width: 100px;
+    height: 100px;
+  }
+  .nav-tabs .nav-link.active {
+    background-color: transparent !important;
+    color: #f8f9fa !important;
+    border: none !important;
+  }
+  .nav-tabs .nav-link {
+    color: #f8f9fa;
+  }
+  .tab-content {
+    padding: 1rem;
+  }
+  .card {
+    background-color: transparent !important;
+  }
+</style>

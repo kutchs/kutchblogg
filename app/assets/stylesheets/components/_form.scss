@@ -1,0 +1,14 @@
+.form-control.custom-input,
+.form-check-input.custom-input {
+  color: rgb(11, 11, 13); /* Texte blanc */
+  border: 1px solid #ced4da; /* Bordure grise */
+}
+
+.form-control.custom-input::placeholder,
+.form-check-input.custom-input::placeholder {
+  color: #6c757d; /* Texte de l'espace réservé en gris clair */
+}
+.form-container {
+  padding-left: 120px;
+  padding-right: 120px;
+}

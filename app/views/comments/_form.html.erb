@@ -1,14 +1,9 @@
-
-<%= simple_form_for(@comment) do |f| %>
-  <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-  <div class="form-inputs">
-    <%= f.association :user %>
-    <%= f.association :post %>
+<%= form_with(model: [post, post.comments.build], local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :content, "Ajouter un commentaire:" %>
+    <%= form.text_area :content, class: 'form-control' %>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-group mt-2">
+    <%= form.submit "Poster", class: 'btn btn-primary' %>
   </div>
 <% end %>
